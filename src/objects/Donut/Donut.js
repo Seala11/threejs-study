@@ -1,6 +1,6 @@
 import { Group } from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
-import MODEL from './donut-big4.glb';
+import MODEL from './donut.glb';
 
 export default class Donut extends Group {
   constructor() {

@@ -1,18 +1,13 @@
 {
-  "name": "three-seed",
-  "version": "0.4.0",
-  "description": "Three.js starter project boilerplate bundled with webpack",
+  "name": "donut",
+  "version": "0.0.1",
+  "description": "three js study preject",
   "keywords": [
-    "webgl",
-    "boilerplate",
-    "three.js",
-    "es6",
-    "webpack"
+    "three.js"
   ],
   "scripts": {
     "start": "webpack serve",
-    "prebuild": "rimraf ./build && mkdir ./build",
-    "build": "webpack --mode production"
+    "build": "webpack --config webpack.config.prod.js"
   },
   "dependencies": {
     "three": "^0.147.0",

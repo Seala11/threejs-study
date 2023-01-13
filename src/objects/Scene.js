@@ -1,6 +1,6 @@
 import { Group } from 'three';
 import BasicLights from './Lights.js';
-import Donut from './donut/Donut.js';
+import Donut from './Donut/Donut.js';
 
 export default class SeedScene extends Group {
   constructor() {

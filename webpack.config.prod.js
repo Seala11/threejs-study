@@ -5,10 +5,10 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
   entry: ['./src/entry.js'],
   output: {
-    path: path.join(__dirname, './'),
+    path: path.join(__dirname, './build'),
     filename: '[name].[hash].js'
   },
-  mode: 'development',
+  mode: 'production',
   target: 'web',
   devtool: 'source-map',
   module: {
