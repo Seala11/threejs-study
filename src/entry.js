@@ -19,7 +19,7 @@ const seedScene = new SeedScene();
 scene.add(seedScene);
 
 // camera
-camera.position.set(1.5, 1.5, 1);
+camera.position.set(2, 1.5, 1);
 // camera.position.set(6,3,-10);
 // camera.position.set(1, 1, 1);
 camera.lookAt(new Vector3(0, 0, 0));
