@@ -1,12 +1,3 @@
-/**
- * entry.js
- *
- * This is the first file loaded. It sets up the Renderer,
- * Scene and Camera. It also starts the render loop and
- * handles window resizes.
- *
- */
-
 import {
   WebGLRenderer,
   PerspectiveCamera,
@@ -21,7 +12,7 @@ import DonutScene from "./objects/Scene.js";
 
 const scene = new Scene();
 const camera = new PerspectiveCamera();
-const renderer = new WebGLRenderer({ antialias: true });
+const renderer = new WebGLRenderer({ antialias: true, alpha: true });
 const donutScene = new DonutScene();
 
 // scene
@@ -43,12 +34,11 @@ const raycaster = new Raycaster();
 const pointOfIntersection = new Vector3();
 
 function onPointerMove(event) {
-  donutScene.rotation.y = 0;
   pointer.x = event.clientX;
   pointer.y = event.clientY;
 
   mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-  mouse.y = - (event.clientY / window.innerHeight) * 2 + 1;
+  mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
 
   pointLight.position.y = mouse.y;
   pointLight.position.x = mouse.x;
@@ -66,8 +56,8 @@ renderer.setClearColor(0xa567cf, 0.5);
 
 // render loop
 const onAnimationFrameHandler = (timeStamp) => {
+  donutScene.update(timeStamp);
   renderer.render(scene, camera);
-  // donutScene.update && donutScene.update(timeStamp);
   window.requestAnimationFrame(onAnimationFrameHandler);
 };
 
