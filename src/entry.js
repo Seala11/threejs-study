@@ -49,6 +49,7 @@ function onPointerMove(event) {
 }
 
 window.addEventListener("mousemove", onPointerMove);
+window.addEventListener("touchmove", onPointerMove);
 
 // renderer
 renderer.setPixelRatio(window.devicePixelRatio);
