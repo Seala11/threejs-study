@@ -7,22 +7,58 @@
  *
  */
 
-import { WebGLRenderer, PerspectiveCamera, Scene, Vector3 } from "three";
-import SeedScene from "./objects/Scene.js";
+import {
+  WebGLRenderer,
+  PerspectiveCamera,
+  Scene,
+  Vector3,
+  Plane,
+  Raycaster,
+  Vector2,
+  PointLight,
+} from "three";
+import DonutScene from "./objects/Scene.js";
 
 const scene = new Scene();
 const camera = new PerspectiveCamera();
 const renderer = new WebGLRenderer({ antialias: true });
-const seedScene = new SeedScene();
+const donutScene = new DonutScene();
 
 // scene
-scene.add(seedScene);
+scene.add(donutScene);
 
 // camera
-camera.position.set(2, 1.5, 1);
-// camera.position.set(6,3,-10);
-// camera.position.set(1, 1, 1);
+camera.position.set(2, 1.8, 1);
 camera.lookAt(new Vector3(0, 0, 0));
+
+// mouse move
+const pointer = new Vector2();
+const mouse = new Vector2();
+const pointLight = new PointLight(0xffffff, 1, 10, 1);
+pointLight.intensity = 0.5;
+scene.add(pointLight);
+
+const plane = new Plane(new Vector3(0, 0, 1), 1);
+const raycaster = new Raycaster();
+const pointOfIntersection = new Vector3();
+
+function onPointerMove(event) {
+  donutScene.rotation.y = 0;
+  pointer.x = event.clientX;
+  pointer.y = event.clientY;
+
+  mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+  mouse.y = - (event.clientY / window.innerHeight) * 2 + 1;
+
+  pointLight.position.y = mouse.y;
+  pointLight.position.x = mouse.x;
+
+  raycaster.setFromCamera(mouse, camera);
+  raycaster.ray.intersectPlane(plane, pointOfIntersection);
+  donutScene.lookAt(pointOfIntersection);
+}
+
+window.addEventListener("mousemove", onPointerMove);
 
 // renderer
 renderer.setPixelRatio(window.devicePixelRatio);
@@ -31,10 +67,11 @@ renderer.setClearColor(0xa567cf, 0.5);
 // render loop
 const onAnimationFrameHandler = (timeStamp) => {
   renderer.render(scene, camera);
-  seedScene.update && seedScene.update(timeStamp);
+  // donutScene.update && donutScene.update(timeStamp);
   window.requestAnimationFrame(onAnimationFrameHandler);
 };
-window.requestAnimationFrame(onAnimationFrameHandler);
+
+onAnimationFrameHandler();
 
 // resize
 const windowResizeHanlder = () => {

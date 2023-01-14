@@ -2,7 +2,7 @@ import { Group } from 'three';
 import BasicLights from './Lights.js';
 import Donut from './Donut/Donut.js';
 
-export default class SeedScene extends Group {
+export default class DonutScene extends Group {
   constructor() {
     super();
 
