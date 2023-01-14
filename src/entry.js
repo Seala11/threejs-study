@@ -48,8 +48,23 @@ function onPointerMove(event) {
   donutScene.lookAt(pointOfIntersection);
 }
 
+function onTouchMove(event) {
+  pointer.x = event.changedTouches[0].clientX;
+  pointer.y = event.changedTouches[0].clientY;
+
+  mouse.x = (event.changedTouches[0].clientX / window.innerWidth) * 2 - 1;
+  mouse.y = -(event.changedTouches[0].clientY / window.innerHeight) * 2 + 1;
+
+  pointLight.position.y = mouse.y;
+  pointLight.position.x = mouse.x;
+
+  raycaster.setFromCamera(mouse, camera);
+  raycaster.ray.intersectPlane(plane, pointOfIntersection);
+  donutScene.lookAt(pointOfIntersection);
+}
+
 window.addEventListener("mousemove", onPointerMove);
-window.addEventListener("touchmove", onPointerMove);
+window.addEventListener("touchmove", onTouchMove);
 
 // renderer
 renderer.setPixelRatio(window.devicePixelRatio);
