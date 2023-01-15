@@ -4,7 +4,6 @@ import {
   PointLight,
   AmbientLight,
   HemisphereLight,
-  Color,
 } from "three";
 
 export default class BasicLights extends Group {
@@ -12,15 +11,15 @@ export default class BasicLights extends Group {
     super(...args);
 
     const point = new PointLight(0xffffff, 1, 10, 1);
-    const dir = new SpotLight(0xffffff, 0.8, 7, 0.8, 0.6, 0.8);
-    const ambi = new AmbientLight(0x404040, 0.3);
-    const hemi = new HemisphereLight(0xffffbb, 0x080820, 0.8);
+    const dir = new SpotLight(0xFFF04B, 0.4, 7, 0.8, 0.6, 0.8);
+    const ambi = new AmbientLight(0x404040, 1);
+    const hemi = new HemisphereLight(0xF5B999, 0x787DFF, 0.8);
 
     dir.position.set(3, 1, 2);
     dir.target.position.set(0, 0, 0);
 
     point.position.set(0, 1, 5);
-    point.intensity = 0.5;
+    point.intensity = 0.1;
 
     this.add(point, ambi, hemi, dir);
   }

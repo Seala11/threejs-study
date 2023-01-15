@@ -3,8 +3,6 @@ import {
   PerspectiveCamera,
   Scene,
   Vector3,
-  Plane,
-  Raycaster,
   Vector2,
   PointLight,
 } from "three";
@@ -85,7 +83,7 @@ camera.lookAt(controls.target);
 
 // renderer
 renderer.setPixelRatio(window.devicePixelRatio);
-renderer.setClearColor(0xa567cf, 0.5);
+renderer.setClearColor(0xD2B2E7, 1);
 
 // render loop
 const onAnimationFrameHandler = (timeStamp) => {
