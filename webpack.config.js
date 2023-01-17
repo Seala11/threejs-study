@@ -1,30 +1,32 @@
-const path = require('path');
-const pkg = require('./package.json');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const path = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
-  entry: ['./src/entry.js'],
+  entry: ["./src/index.js"],
   output: {
-    path: path.join(__dirname, './'),
-    filename: '[name].[hash].js'
+    path: path.join(__dirname, "./"),
+    filename: "[name].[hash].js",
   },
-  mode: 'development',
-  target: 'web',
-  devtool: 'source-map',
+  mode: "development",
+  target: "web",
+  devtool: "source-map",
   module: {
     rules: [
       {
         test: /\.js$/,
-        use: 'babel-loader',
-        exclude: path.resolve(__dirname, './node_modules/')
-      },{
-        test: /\.(jpe?g|png|gif|svg|tga|glb|gltf|babylon|mtl|pcb|pcd|prwm|obj|mat|mp3|ogg)$/i,
-        use: 'file-loader',
-        exclude: path.resolve(__dirname, './node_modules/')
-      }
-    ]
+        use: "babel-loader",
+        exclude: path.resolve(__dirname, "./node_modules/"),
+      },
+      {
+        test: /\.(glb|gltf)$/i,
+        use: "file-loader",
+        exclude: path.resolve(__dirname, "./node_modules/"),
+      },
+    ],
   },
   plugins: [
-    new HtmlWebpackPlugin({'title': 'donut project'})
-  ]
-}
+    new HtmlWebpackPlugin({
+      title: "Donut ThreeJs",
+    }),
+  ],
+};
