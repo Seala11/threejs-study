@@ -21,11 +21,9 @@ export default class World {
     this.lights = new Lights(this.scene, this.camera, this.donut);
     this.scene.add(this.donut);
 
-    console.log(this.donut.rotation);
-
     container.appendChild(this.renderer.domElement);
 
-    // this.loop.updatables.push(this.controls);
+    this.loop.updatables.push(this.controls);
     this.loop.updatables.push(this.donut);
   }
 
