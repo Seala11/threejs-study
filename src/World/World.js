@@ -8,7 +8,6 @@ import Resizer from "./systems/Resizer";
 import Loop from "./systems/Loop";
 import Controls from "./systems/Controls";
 
-
 export default class World {
   constructor(container) {
     this.scene = new THREE.Scene();
@@ -19,12 +18,14 @@ export default class World {
     this.resizer = new Resizer(this.camera, this.renderer);
 
     this.donut = new Donut();
-    this.lights = new Lights();
-    this.scene.add(this.donut, ...this.lights);
+    this.lights = new Lights(this.scene, this.camera, this.donut);
+    this.scene.add(this.donut);
+
+    console.log(this.donut.rotation);
 
     container.appendChild(this.renderer.domElement);
 
-    this.loop.updatables.push(this.controls);
+    // this.loop.updatables.push(this.controls);
     this.loop.updatables.push(this.donut);
   }
 
