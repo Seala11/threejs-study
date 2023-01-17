@@ -1,12 +1,13 @@
 import * as THREE from "three";
 import Camera from "./components/Camera";
-import Donut from "./components/Donut";
 import Lights from "./components/Lights";
+import Donut from "./components/Donut/Donut";
 
 import Renderer from "./systems/Renderer";
 import Resizer from "./systems/Resizer";
 import Loop from "./systems/Loop";
 import Controls from "./systems/Controls";
+
 
 export default class World {
   constructor(container) {
@@ -18,8 +19,8 @@ export default class World {
     this.resizer = new Resizer(this.camera, this.renderer);
 
     this.donut = new Donut();
-    this.light = new Lights();
-    this.scene.add(this.donut, this.light);
+    this.lights = new Lights();
+    this.scene.add(this.donut, ...this.lights);
 
     container.appendChild(this.renderer.domElement);
 

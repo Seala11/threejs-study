@@ -1,9 +1,9 @@
 import { MathUtils } from "three";
-import DonutScene from "../../objects/Scene";
+import DonutModel from './Model';
 
 class Donut {
   constructor() {
-    this.donutScene = new DonutScene();
+    this.donutScene = new DonutModel();
     this.radiansPerSecond = MathUtils.degToRad(10);
 
     this.donutScene.rotation.set(-0.5, -0.1, 0.8);

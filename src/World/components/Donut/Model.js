@@ -2,7 +2,7 @@ import { Group } from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import MODEL from './donut.glb';
 
-export default class Donut extends Group {
+export default class DonutModel extends Group {
   constructor() {
     const loader = new GLTFLoader();
     
