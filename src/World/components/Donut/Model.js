@@ -1,17 +1,34 @@
-import { Group } from 'three';
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
-import MODEL from './donut.glb';
+import { Group } from "three";
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
+import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader.js";
+import MODEL from "./donut.glb";
 
 export default class DonutModel extends Group {
   constructor() {
-    const loader = new GLTFLoader();
-    
     super();
+    this.name = "donut";
+    
+    this.dracoLoader = new DRACOLoader();
+    this.dracoLoader.setDecoderConfig({type: 'js'});
+    this.dracoLoader.setDecoderPath(
+      "https://www.gstatic.com/draco/versioned/decoders/1.4.1/"
+    );
 
-    this.name = 'donut';
+    this.GLTFLoader = new GLTFLoader();
+    this.GLTFLoader.setDRACOLoader(this.dracoLoader);
 
-    loader.load(MODEL, (gltf)=>{
-      this.add(gltf.scene);
-    })
+
+    this.GLTFLoader.load(
+      MODEL,
+      (gltf) => {
+        this.add(gltf.scene);
+      },
+      (xhr) => {
+        // console.log(xhr, (xhr.loaded / xhr.total) * 100 + "% loaded");
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
   }
 }
