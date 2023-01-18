@@ -3,9 +3,11 @@ import { PerspectiveCamera } from "three";
 class Camera {
   constructor() {
     this.camera = new PerspectiveCamera(35, 1, 0.1, 100);
-    this.camera.position.set(0, 0, 5);
+    this.resetPosition();
+  }
 
-    return this.camera;
+  resetPosition() {
+    this.camera.position.set(-0.5, -0.1, 5);
   }
 }
 
