@@ -27,7 +27,7 @@ export default class World {
     this.loop.updatables.push(this.controls);
     this.loop.updatables.push(this.donut.donut);
 
-    this.datGui = new DatGui(this.camera, this.donut);
+    this.datGui = new DatGui(this.camera, this.donut, this.lights);
   }
 
   render() {

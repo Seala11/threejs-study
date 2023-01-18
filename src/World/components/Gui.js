@@ -1,10 +1,11 @@
 import { GUI } from "dat.gui";
 
 class DatGui {
-  constructor(camera, donut) {
+  constructor(camera, donut, lights) {
     this.camera = camera;
     this.donutModel = donut;
     this.donut = this.donutModel.donut;
+    this.lights = lights;
 
     this.currSpeed = {
       x: this.donut.radiansPerSecondX,
@@ -16,13 +17,14 @@ class DatGui {
       width: 300,
     });
 
-    this.setDonutFolder();
     this.setCameraFolder();
+    this.setLightFolder();
+    this.setDonutFolder();
     this.setVelocityFolder();
 
-    this.gui.add(this, "reset");
-    this.gui.add(this, "stop");
-    this.gui.add(this, "play");
+    this.gui.add(this, "stop").name("Stop");
+    this.gui.add(this, "play").name("Play");
+    this.gui.add(this, "reset").name("Reset");
   }
 
   setDonutFolder() {
@@ -47,14 +49,24 @@ class DatGui {
     this.velocityFolder.close();
   }
 
+  setLightFolder() {
+    this.lightFolder = this.gui.addFolder("Light");
+    this.lightFolder
+      .addColor(new ColorGUIHelper(this.lights.sunLight, "color"), "value")
+      .name("color");
+    this.lightFolder.add(this.lights.sunLight, "intensity", 0, 20, 0.01);
+  }
+
   reset() {
     this.donutModel.resetRotation();
     this.donutModel.resetRadiansPerSecond();
     this.camera.resetPosition();
+    this.lights.resetSunLights();
 
     this.donutFolder.updateDisplay();
     this.velocityFolder.updateDisplay();
     this.cameraFolder.updateDisplay();
+    this.lightFolder.updateDisplay();
   }
 
   stop() {
@@ -83,3 +95,18 @@ class DatGui {
 }
 
 export default DatGui;
+
+// https://r105.threejsfundamentals.org/threejs/lessons/threejs-lights.html
+class ColorGUIHelper {
+  constructor(object, prop) {
+    this.object = object;
+    this.prop = prop;
+  }
+  get value() {
+    return `#${this.object[this.prop].getHexString()}`;
+  }
+  set value(hexString) {
+    console.log(this.object, this.prop, this.object[this.prop]);
+    this.object[this.prop].set(hexString);
+  }
+}
