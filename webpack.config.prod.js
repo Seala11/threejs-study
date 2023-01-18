@@ -5,11 +5,12 @@ module.exports = {
   entry: ['./src/index.js'],
   output: {
     path: path.join(__dirname, './build'),
-    filename: '[name].[hash].js'
+    filename: '[name].[hash].js',
+    clean: true,
   },
   mode: 'production',
   target: 'web',
-  devtool: 'source-map',
+  devtool: 'eval',
   module: {
     rules: [
       {

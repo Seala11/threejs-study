@@ -6,6 +6,7 @@ module.exports = {
   output: {
     path: path.join(__dirname, "./"),
     filename: "[name].[hash].js",
+    clean: true,
   },
   mode: "development",
   target: "web",
