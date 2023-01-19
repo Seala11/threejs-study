@@ -1,10 +1,11 @@
+import GithubLink from './World/components/GithubLink.js';
 import World from "./World/World.js";
 
-async function main() {
-  const container = document.body;
-  document.body.style.margin = 0;
-  const world = new World(container);
-  world.start();
-}
+const world = new World(document.body);
+document.body.style.margin = 0;
+document.body.style.position = "relative";
 
-main();
+const githubLink = new GithubLink();
+document.body.appendChild(githubLink);
+
+world.start();
