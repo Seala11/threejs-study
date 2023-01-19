@@ -4,9 +4,9 @@ class Controls {
   constructor(camera, canvas) {
     this.controls = new OrbitControls(camera, canvas);
 
-    // damping and auto rotation require
-    // the controls to be updated each frame
     this.controls.enableDamping = true;
+    this.controls.minDistance = 2;
+    this.controls.maxDistance = 10;
 
     this.controls.tick = () => this.controls.update();
 

@@ -20,12 +20,15 @@ class DatGui {
     this.setCameraFolder();
     this.setDirLightFolder();
     this.setAmbiLightFolder();
+    this.setHemiLightFolder();
     this.setDonutFolder();
     this.setVelocityFolder();
 
     this.gui.add(this, "stop").name("Stop");
     this.gui.add(this, "play").name("Play");
     this.gui.add(this, "reset").name("Reset");
+
+    this.gui.close();
   }
 
   setDonutFolder() {
@@ -66,6 +69,17 @@ class DatGui {
     this.ambiLightFolder.add(this.lights.ambientLight, "intensity", 0, 2, 0.01);
   }
 
+  setHemiLightFolder() {
+    this.hemiLightFolder = this.gui.addFolder("Hemisphere Light");
+    this.hemiLightFolder
+      .addColor(new ColorGUIHelper(this.lights.hemiLight, "color"), "value")
+      .name("sky color");
+    this.hemiLightFolder
+      .addColor(new ColorGUIHelper(this.lights.hemiLight, "groundColor"), "value")
+      .name("ground color");
+    this.hemiLightFolder.add(this.lights.hemiLight, "intensity", 0, 10, 0.01);
+  }
+
   reset() {
     this.donutModel.resetRotation();
     this.donutModel.resetRadiansPerSecond();
@@ -77,6 +91,7 @@ class DatGui {
     this.cameraFolder.updateDisplay();
     this.dirLightFolder.updateDisplay();
     this.ambiLightFolder.updateDisplay();
+    this.hemiLightFolder.updateDisplay();
   }
 
   stop() {
