@@ -18,7 +18,8 @@ class DatGui {
     });
 
     this.setCameraFolder();
-    this.setLightFolder();
+    this.setDirLightFolder();
+    this.setAmbiLightFolder();
     this.setDonutFolder();
     this.setVelocityFolder();
 
@@ -49,24 +50,33 @@ class DatGui {
     this.velocityFolder.close();
   }
 
-  setLightFolder() {
-    this.lightFolder = this.gui.addFolder("Light");
-    this.lightFolder
+  setDirLightFolder() {
+    this.dirLightFolder = this.gui.addFolder("Directional Light");
+    this.dirLightFolder
       .addColor(new ColorGUIHelper(this.lights.sunLight, "color"), "value")
       .name("color");
-    this.lightFolder.add(this.lights.sunLight, "intensity", 0, 20, 0.01);
+    this.dirLightFolder.add(this.lights.sunLight, "intensity", 0, 20, 0.01);
+  }
+
+  setAmbiLightFolder() {
+    this.ambiLightFolder = this.gui.addFolder("Ambient Light");
+    this.ambiLightFolder
+      .addColor(new ColorGUIHelper(this.lights.ambientLight, "color"), "value")
+      .name("color");
+    this.ambiLightFolder.add(this.lights.ambientLight, "intensity", 0, 2, 0.01);
   }
 
   reset() {
     this.donutModel.resetRotation();
     this.donutModel.resetRadiansPerSecond();
     this.camera.resetPosition();
-    this.lights.resetSunLights();
+    this.lights.resetLights();
 
     this.donutFolder.updateDisplay();
     this.velocityFolder.updateDisplay();
     this.cameraFolder.updateDisplay();
-    this.lightFolder.updateDisplay();
+    this.dirLightFolder.updateDisplay();
+    this.ambiLightFolder.updateDisplay();
   }
 
   stop() {
@@ -106,7 +116,6 @@ class ColorGUIHelper {
     return `#${this.object[this.prop].getHexString()}`;
   }
   set value(hexString) {
-    console.log(this.object, this.prop, this.object[this.prop]);
     this.object[this.prop].set(hexString);
   }
 }

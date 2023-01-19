@@ -5,26 +5,29 @@ class Lights {
     this.scene = scene;
     this.camera = camera;
     this.donut = donut;
-    this.color = 0xffffff;
+    this.dirColor = 0xffffff;
+    this.ambiColor = 0xffffff;
     this.setSunLights();
     this.setAmbientLights();
   }
 
   setSunLights() {
-    console.log(this.color);
-    this.sunLight = new THREE.DirectionalLight(this.color, 6);
+    this.sunLight = new THREE.DirectionalLight(this.dirColor, 6);
     this.sunLight.position.set(-1.5, 7, 3);
     this.scene.add(this.sunLight);
   }
 
   setAmbientLights() {
-    this.ambientLight = new THREE.AmbientLight(0xffffff, 1);
+    this.ambientLight = new THREE.AmbientLight(this.ambiColor, 1);
     this.scene.add(this.ambientLight);
   }
 
-  resetSunLights() {
-    this.sunLight.color.set(this.color);
+  resetLights() {
+    this.sunLight.color.set(this.dirColor);
     this.sunLight.intensity = 6;
+
+    this.ambientLight.color.set(this.ambiColor);
+    this.ambientLight.intensity = 1;
   }
 }
 
