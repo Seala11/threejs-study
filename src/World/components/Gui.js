@@ -21,6 +21,7 @@ class DatGui {
     this.setDirLightFolder();
     this.setAmbiLightFolder();
     this.setHemiLightFolder();
+    this.setSpotLightFolder();
     this.setDonutFolder();
     this.setVelocityFolder();
 
@@ -80,6 +81,19 @@ class DatGui {
     this.hemiLightFolder.add(this.lights.hemiLight, "intensity", 0, 10, 0.01);
   }
 
+  setSpotLightFolder() {
+    this.spotLightFolder = this.gui.addFolder("Spot Light");
+    this.spotLightFolder
+      .addColor(new ColorGUIHelper(this.lights.spotLight, "color"), "value")
+      .name("color");
+    this.spotLightFolder.add(this.lights.spotLight, "intensity", 0, 100, 0.1);
+    this.spotLightFolder.add(this.lights.spotLight, "distance", 0, 20, 0.1);
+    this.spotLightFolder.add(this.lights.spotLight, "angle", 0, Math.PI / 2, 0.00001);
+    this.spotLightFolder.add(this.lights.spotLight, "penumbra", 0, 1, 0.01);
+    this.spotLightFolder.add(this.lights.spotLight, "decay", 0, 5, 0.01);
+    console.log(this.lights.spotLight)
+  }
+
   reset() {
     this.donutModel.resetRotation();
     this.donutModel.resetRadiansPerSecond();
@@ -92,6 +106,7 @@ class DatGui {
     this.dirLightFolder.updateDisplay();
     this.ambiLightFolder.updateDisplay();
     this.hemiLightFolder.updateDisplay();
+    this.spotLightFolder.updateDisplay();
   }
 
   stop() {
