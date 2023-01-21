@@ -22,6 +22,7 @@ class DatGui {
     this.setAmbiLightFolder();
     this.setHemiLightFolder();
     this.setSpotLightFolder();
+    this.setPointLightFolder();
     this.setDonutFolder();
     this.setVelocityFolder();
 
@@ -76,7 +77,10 @@ class DatGui {
       .addColor(new ColorGUIHelper(this.lights.hemiLight, "color"), "value")
       .name("sky color");
     this.hemiLightFolder
-      .addColor(new ColorGUIHelper(this.lights.hemiLight, "groundColor"), "value")
+      .addColor(
+        new ColorGUIHelper(this.lights.hemiLight, "groundColor"),
+        "value"
+      )
       .name("ground color");
     this.hemiLightFolder.add(this.lights.hemiLight, "intensity", 0, 10, 0.01);
   }
@@ -88,10 +92,25 @@ class DatGui {
       .name("color");
     this.spotLightFolder.add(this.lights.spotLight, "intensity", 0, 100, 0.1);
     this.spotLightFolder.add(this.lights.spotLight, "distance", 0, 20, 0.1);
-    this.spotLightFolder.add(this.lights.spotLight, "angle", 0, Math.PI / 2, 0.00001);
+    this.spotLightFolder.add(
+      this.lights.spotLight,
+      "angle",
+      0,
+      Math.PI / 2,
+      0.00001
+    );
     this.spotLightFolder.add(this.lights.spotLight, "penumbra", 0, 1, 0.01);
     this.spotLightFolder.add(this.lights.spotLight, "decay", 0, 5, 0.01);
-    console.log(this.lights.spotLight)
+  }
+
+  setPointLightFolder() {
+    this.pointLightFolder = this.gui.addFolder("Point Light");
+    this.pointLightFolder
+      .addColor(new ColorGUIHelper(this.lights.pointLight, "color"), "value")
+      .name("color");
+    this.pointLightFolder.add(this.lights.pointLight, "intensity", 0, 100, 0.1);
+    this.pointLightFolder.add(this.lights.pointLight, "distance", 0, 20, 0.1);
+    this.pointLightFolder.add(this.lights.pointLight, "decay", 0, 5, 0.01);
   }
 
   reset() {
@@ -107,6 +126,7 @@ class DatGui {
     this.ambiLightFolder.updateDisplay();
     this.hemiLightFolder.updateDisplay();
     this.spotLightFolder.updateDisplay();
+    this.pointLightFolder.updateDisplay();
   }
 
   stop() {

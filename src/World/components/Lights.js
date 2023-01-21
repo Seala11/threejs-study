@@ -19,12 +19,19 @@ class Lights {
         penumbra: 0.6,
         decay: 2,
       },
+      pointLight: {
+        color: 0xffffff,
+        intensity: 0.4,
+        distance: 7,
+        decay: 2,
+      },
     };
 
     this.setSunLights();
     this.setAmbientLights();
     this.setHemisphereLight();
     this.setSpotLight();
+    this.setPointLight();
   }
 
   setSunLights() {
@@ -53,6 +60,12 @@ class Lights {
     this.scene.add(this.spotLight);
   }
 
+  setPointLight() {
+    this.pointLight = new THREE.PointLight(this.options.pointLight);
+    this.pointLight.position.set(-1.5, 5, 3);
+    this.scene.add(this.pointLight);
+  }
+
   resetLights() {
     this.sunLight.color.set(this.dirColor);
     this.sunLight.intensity = 6;
@@ -70,6 +83,11 @@ class Lights {
     this.spotLight.distance = this.options.spotLight.distance;
     this.spotLight.intensity = this.options.spotLight.intensity;
     this.spotLight.penumbra = this.options.spotLight.penumbra;
+
+    this.pointLight.color.set(this.options.pointLight.color);
+    this.pointLight.decay = this.options.pointLight.decay;
+    this.pointLight.distance = this.options.pointLight.distance;
+    this.pointLight.intensity = this.options.pointLight.intensity;
   }
 }
 
